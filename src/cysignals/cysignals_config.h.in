@@ -33,3 +33,16 @@
 #undef CYSIGNALS_CXX_ATOMIC
 #undef CYSIGNALS_STD_ATOMIC
 #endif
+
+#if !defined(__MINGW32__) && !defined(_WIN32)
+#define POSIX
+#else
+/*
+define unused signals for windows and give each a different value to compile
+when two or more a these signals are used in the same switch.
+*/
+#define SIGHUP SIGTERM
+#define SIGBUS SIGSEGV
+#define SIGALRM SIGINT
+#define SIGQUIT SIGTERM
+#endif
